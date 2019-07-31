@@ -5,46 +5,110 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+    <style>
+        body {
+            text-transform: capitalize
+        }
+        .minmin {
+            border-radius: 20px;
+            box-shadow: 5px 5px 5px blue;
+        }
+        .alert {
+            border-radius: 20px !important
+        }
+    </style>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   </head>
   <body>
-      <h1>ATN register</h1>
-      <form action="" method="POST" name="register" onsubmit="return validateForm()">
-          <table class="table table-hover">
-              <tr>
-                  <th colspan="2">Please fill out of this form below</th>
-              </tr>
-              <tr>
-                  <th>Full Name: </th>
-                  <th><input type="text" name="txtName" placeholder="Enter your full name" required></th>
-              </tr>
-              <tr>
-                  <th>Phone Number: </th>
-                  <th><input type="text" name="txtPhone" placeholder="Enter your phone number" required></th>
-              </tr>
-              <tr>
-                  <th>Address: </th>
-                  <th><input type="text" name="txtAddress" placeholder="Enter your address" required></th>
-              </tr>
-              <tr>
-                  <th>Username: </th>
-                  <th><input type="text" name="txtUsername" placeholder="Enter username want to create" required></th>
-              </tr>
-              <tr>
-                  <th>Password: </th>
-                  <th><input type="password" name="txtPassword" placeholder="Enter your password" required></th>
-              </tr>
-              <tr>
-                  <th>Email: </th>
-                  <th><input type="email" name="txtEmail" placeholder="Enter your email" required></th>
-              </tr>
-              <tr>
-                  <th colspan="2"><button type="submit" class="btn btn-primary">Register</button></th>
-              </tr>
-          </table>
-      </form>
+    <div class="container minmin">
+<% if (locals.err) { %>
+    <% var a = [ 'primary', 'danger', 'info', 'warning', 'success', 'danger' ] %>
+    <% for(var i= 0; i < err.length; i++) { %>
+        <div class="alert alert-<%= a[i % 6] %> alert-dismissible fade show" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <strong><%= err[i].msg %></strong> 
+        </div>
+    <% } %>
+<% } %>
+    
+<% if (locals.input) { %>
+        <h1 class="text-center">ATN register</h1>
+        <form action="" method="POST" name="register" onsubmit="return validateForm()">
+            <table class="table table-hover">
+                <tr>
+                    <th colspan="2" class="text-center">Please fill out of this form below</th>
+                </tr>
+                <tr>
+                    <th>Full Name: </th>
+                    <th><input class="form-control" type="text" name="txtName" placeholder="Enter your full name" value="<%= input.txtName %>" required></th>
+                </tr>
+                <tr>
+                    <th>Phone Number: </th>
+                    <th><input class="form-control" type="text" name="txtPhone" placeholder="Enter your phone number" value="<%= input.txtPhone %>" required></th>
+                </tr>
+                <tr>
+                    <th>Address: </th>
+                    <th><input class="form-control" type="text" name="txtAddress" placeholder="Enter your address" value="<%= input.txtAddress %>" required></th>
+                </tr>
+                <tr>
+                    <th>Username: </th>
+                    <th><input class="form-control" type="text" name="txtUsername" placeholder="Enter username want to create" value="<%= input.txtUsername %>" required></th>
+                </tr>
+                <tr>
+                    <th>Password: </th>
+                    <th><input class="form-control" type="password" name="txtPassword" placeholder="Enter your password" value="<%= input.txtPassword %>" required></th>
+                </tr>
+                <tr>
+                    <th>Email: </th>
+                    <th><input class="form-control" type="email" name="txtEmail" placeholder="Enter your email" value="<%= input.txtEmail %>" required></th>
+                </tr>
+                <tr>
+                    <th colspan="2"><button type="submit" class="btn btn-primary btn-block">Register</button></th>
+                </tr>
+            </table>
+        </form>
+<% }else { %>
+        <h1 class="text-center">ATN register</h1>
+        <form action="" method="POST" name="register" onsubmit="return validateForm()">
+            <table class="table table-hover">
+                <tr>
+                    <th colspan="2" class="text-center">Please fill out of this form below</th>
+                </tr>
+                <tr>
+                    <th>Full Name: </th>
+                    <th><input class="form-control" type="text" name="txtName" placeholder="Enter your full name" value="" required></th>
+                </tr>
+                <tr>
+                    <th>Phone Number: </th>
+                    <th><input class="form-control" type="text" name="txtPhone" placeholder="Enter your phone number" value="" required></th>
+                </tr>
+                <tr>
+                    <th>Address: </th>
+                    <th><input class="form-control" type="text" name="txtAddress" placeholder="Enter your address" value="" required></th>
+                </tr>
+                <tr>
+                    <th>Username: </th>
+                    <th><input class="form-control" type="text" name="txtUsername" placeholder="Enter username want to create" value="" required></th>
+                </tr>
+                <tr>
+                    <th>Password: </th>
+                    <th><input class="form-control" type="password" name="txtPassword" placeholder="Enter your password" value="" required></th>
+                </tr>
+                <tr>
+                    <th>Email: </th>
+                    <th><input class="form-control" type="email" name="txtEmail" placeholder="Enter your email" value="" required></th>
+                </tr>
+                <tr>
+                    <th colspan="2"><button type="submit" class="btn btn-primary btn-block">Register</button></th>
+                </tr>
+            </table>
+        </form>
+<% } %>
+        
+        
     <script>
         function validateForm() {
             var x = document.forms["register"]
@@ -69,5 +133,6 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    </div>
   </body>
 </html>

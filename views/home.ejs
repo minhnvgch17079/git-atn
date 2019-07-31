@@ -11,6 +11,14 @@
   </head>
   <body>
     <h1>ATN STORE</h1>
+
+    <% if(locals.store) { %>
+      <h1><%= store %></h1><strong><a href="./logout">Logout</a></strong>
+    <% } %>
+    <% if(locals.user) { %>
+      <h1><%= user %></h1><strong><a href="./logout">Logout</a></strong>
+    <% } %>
+
     <a href="./register" class="btn btn-primary">Register</a>
     <a href="./signin" class="btn btn-primary">Sign In</a>
     <h1>Contact us to be store partner</h1>

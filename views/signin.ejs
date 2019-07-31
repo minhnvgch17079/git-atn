@@ -5,27 +5,37 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+    <style>
+      body {
+        text-transform: capitalize;
+      }
+      .minmin {
+        border-radius: 20px;
+        box-shadow: 5px 5px 5px blue;
+      }
+    </style>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   </head>
   <body>
-      <h1>ATN Sign In</h1>
+    <div class="container minmin">
+      <h1 class="text-center">ATN Sign In</h1>
       <form action="" method="POST">
           <table class="table table-hover">
               <tr>
                 <th>User Name: </th>
-                <th><input type="text" name="txtUsername" placeholder="Enter Your User Name"></th>
+                <th><input class="form-control" type="text" name="txtUsername" placeholder="Enter Your User Name"></th>
               </tr>
               <tr>
                 <th>Password</th>
-                <th><input type="password" name="txtPassword" placeholder="Enter Your Password"></th>
+                <th><input class="form-control" type="password" name="txtPassword" placeholder="Enter Your Password"></th>
               </tr>
               <tr>
-                <th><button type="submit" class="btn btn-primary">Sign In</button></th>
+                <th colspan="2"><button type="submit" class="btn btn-primary btn-block">Sign In</button></th>
               </tr>
           </table>
       </form>
+    </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
