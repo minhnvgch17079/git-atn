@@ -5,24 +5,89 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+    <style>
+      body {
+        text-transform: capitalize;
+      }
+      .nav-link {
+        margin: 10px;
+      }
+      .btn {
+        border-radius: 20px !important;
+      }
+      
+    </style>
     <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   </head>
   <body>
-    <h1>ATN STORE</h1>
-
-    <% if(locals.store) { %>
-      <h1><%= store %></h1><strong><a href="./logout">Logout</a></strong>
-    <% } %>
+    <div class="container">
+  <% if(locals.store) { %>
+        <h1><%= store %></h1><strong><a href="./logout">Logout</a></strong>
+  <% }else { %>
     <% if(locals.user) { %>
-      <h1><%= user %></h1><strong><a href="./logout">Logout</a></strong>
+        <h1><%= user %></h1><strong><a href="./logout">Logout</a></strong>
+    <% }else { %>
+      <nav class="nav justify-content-center">
+          <a class="nav-link btn btn-danger active" href="./">ATN STORE</a>
+          <div class="nav-link">
+            <form action="#">
+              <input class="bg-info" type="text" name="search" placeholder="Text Here For Search..."> 
+              <button type="submit"><i class="fa fa-search"></i></button>
+            </form>
+          </div>
+          <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle btn btn-warning" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Products</a>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="#">Cars toy</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">supper hero</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Action</a>
+              </div>
+          </li>
+          <a class="nav-link btn btn-success " href="./signin">sign in</a>
+          <a class="nav-link btn btn-info " href="./register">register</a>
+          <a class="nav-link btn btn-primary " href="./store/signin">sign in for store</a>
+      </nav>
     <% } %>
-
-    <a href="./register" class="btn btn-primary">Register</a>
-    <a href="./signin" class="btn btn-primary">Sign In</a>
-    <h1>Contact us to be store partner</h1>
-    <a href="./store/signin" class="btn btn-primary">Sign In</a><strong>For Only Store Partner</strong>
+  <% } %>
+      
+      <div class="row">
+        <div class="col-sm-4">
+          <div class="card">
+              <img class="card-img-top" src="1.jpeg" alt="">
+              <div class="card-body text-center">
+                <h4 class="card-title">Product's name</h4>
+                <p class="card-text">information</p>
+                <span>Price </span><a href="#" class="badge badge-pill badge-warning">Order</a>
+              </div>
+          </div>
+        </div> 
+        <div class="col-sm-4">
+            <div class="card">
+                <img class="card-img-top" src="1.jpeg" alt="">
+                <div class="card-body text-center">
+                  <h4 class="card-title">Product's name</h4>
+                  <p class="card-text">information</p>
+                  <span>Price </span><a href="#" class="badge badge-pill badge-warning">Order</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="card">
+                <img class="card-img-top" src="1.jpeg" alt="">
+                <div class="card-body text-center">
+                  <h4 class="card-title">Product's name</h4>
+                  <p class="card-text">information</p>
+                  <span>Price </span><a href="#" class="badge badge-pill badge-warning">Order</a>
+                </div>
+            </div>
+        </div>  
+      </div>
+    </div>
+    
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

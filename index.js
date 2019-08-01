@@ -12,7 +12,7 @@ app.listen(process.env.PORT || port, function(req, res) {
 })
 var store = require('./route/store.router')
 var sess
-
+app.use(express.static('public'))
 app.set('view engine', 'ejs')
 app.set('views', './views')
 app.set('trust proxy', 1)
