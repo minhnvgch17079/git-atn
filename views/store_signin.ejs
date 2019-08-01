@@ -13,28 +13,74 @@
         box-shadow: 5px 5px 5px blue;
         border-radius: 20px;
       }
+      .alert {
+        border-radius: 20px !important
+      }
+      .btn {
+        border-radius: 20px !important
+      }
     </style>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   </head>
   <body>
     <div class="container minmin">
+
+<% if(locals.result) { %>
+  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <strong><%= result %></strong> 
+  </div>
+<% } %>
+
+<% if(locals.err) { %>
+  <% var a = [ 'primary', 'danger', 'info', 'warning', 'success', 'danger' ] %>
+  <% for(var i = 0; i < err.length; i++) { %>
+    <div class="alert alert-<%= a[i % 6] %> alert-dismissible fade show" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <strong><%= err[i].msg %></strong> 
+    </div>
+  <% } %>
+<% } %>
+<% if (locals.input) { %>
       <h1 class="text-center">ATN Sign In For Store</h1>
       <form action="" method="POST">
           <table class="table table-hover">
               <tr>
                 <th>User Name: </th>
-                <th><input class="form-control" type="text" name="txtUsername" placeholder="Enter Your User Name"></th>
+                <th><input class="form-control" type="text" name="txtUsername" value="<%= input.txtUsername %>" placeholder="Enter Your User Name"></th>
               </tr>
               <tr>
                 <th>Password</th>
-                <th><input class="form-control" type="password" name="txtPassword" placeholder="Enter Your Password"></th>
+                <th><input class="form-control" type="password" name="txtPassword" value="<%= input.txtPassword %>" placeholder="Enter Your Password"></th>
               </tr>
               <tr>
-                <th><button type="submit" class="btn btn-primary btn-block">Sign In</button></th>
+                <th colspan="2"><button type="submit" class="btn btn-primary btn-block">Sign In</button></th>
               </tr>
           </table>
       </form>
+<% }else { %>
+    <h1 class="text-center">ATN Sign In For Store</h1>
+    <form action="" method="POST">
+        <table class="table table-hover">
+            <tr>
+              <th>User Name: </th>
+              <th><input class="form-control" type="text" name="txtUsername" value="" placeholder="Enter Your User Name"></th>
+            </tr>
+            <tr>
+              <th>Password</th>
+              <th><input class="form-control" type="password" name="txtPassword" value="" placeholder="Enter Your Password"></th>
+            </tr>
+            <tr>
+              <th colspan="2"><button type="submit" class="btn btn-primary btn-block">Sign In</button></th>
+            </tr>
+        </table>
+    </form>
+<% } %>
     </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

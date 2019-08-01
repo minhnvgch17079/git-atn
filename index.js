@@ -7,7 +7,7 @@ var client = require('./pg')
 var express = require('express')
 var app = express()
 var port = 3000
-app.listen(port, function(req, res) {
+app.listen(process.env.PORT || port, function(req, res) {
     console.log('App running at port ' + port + '....')
 })
 var store = require('./route/store.router')
@@ -49,24 +49,42 @@ app.get('/', function(req, res) {//home page
 app.get('/signin', function(req, res) {
     res.render('signin')
 })
-app.post('/signin', function(req, res, next) {
+app.post('/signin', [
+    check('txtUsername', 'please input you user name').not().isEmpty()
+        .isLength({ max: 20}).withMessage('user name limit by 20 character').escape(),
+    check('txtPassword', 'Please input your password').not().isEmpty()
+        .isLength({min: 6, max: 21}).withMessage('Length of password must from 6 to 21 character').escape()
+], function(req, res, next) {
     sess = req.session
     var q = req.body
-    var sql = "SELECT * FROM customer WHERE user_name = '"+q.txtUsername+"' "
-    sql += "AND password = '"+q.txtPassword+"'"
-    client.query(sql, function(err, res) {
-        if(err) {
-            console.log('Can not sign in')
-        } else {
-            if (res.rows.length == 1) {
-                console.log('Login success')
-                sess.user = res.rows[0].full_name
-                next()
+    var txtUsername = q.txtUsername
+    var txtPassword = q.txtPassword
+    var sql = "SELECT * FROM customer WHERE user_name = '"+txtUsername+"' "
+    sql += "AND password = '"+txtPassword+"'"
+    var errors = validationResult(req)
+    if(errors.isEmpty()) {
+        client.query(sql, function(err, result) {
+            if(err) {
+                console.log('Can not sign in')
             } else {
-                console.log('User name or password wrong')
+                if (result.rows.length == 1) {
+                    sess.user = result.rows[0].full_name
+                    next()
+                } else {
+                    res.render('signin', {
+                        err: errors.array(),
+                        input: q,
+                        result: 'Wrong username or password'
+                    })
+                }
             }
-        }
-    })
+        })
+    } else {
+        res.render('signin', {
+            err: errors.array(),
+            input: q
+        })
+    }
 }, function(req,res) {
     res.redirect('/')
 })
